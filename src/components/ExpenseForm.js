@@ -5,16 +5,24 @@ import { SingleDatePicker } from 'react-dates';
 
 export default class ExpenseForm extends React.Component {
   constructor(props) {
-    super(props);
-
+    super(props);       
     this.state = {
       description: props.expense ? props.expense.description : '',
       note: props.expense ? props.expense.note : '',
       amount: props.expense ? (props.expense.amount / 100).toString() : '',
       createdAt: props.expense ? moment(props.expense.createdAt) : moment(),
       calendarFocused: false,
-      error: ''
+      error: ''      
     };
+  }
+  
+
+  setOriginChange = (origin) =>{
+    console.log(origin);
+    if (origin) {
+      console.log('step origin');
+      this.setState(() => ({ origin }));
+    }
   }
   onDescriptionChange = (e) => {
     const description = e.target.value;
@@ -55,6 +63,7 @@ export default class ExpenseForm extends React.Component {
     }
   };
   render() {
+    const origin = this.props.origin ? 'Update Expense': 'Add Expense'; 
     return (
       <div>
         {this.state.error && <p>{this.state.error}</p>}
@@ -86,7 +95,7 @@ export default class ExpenseForm extends React.Component {
             onChange={this.onNoteChange}
           >
           </textarea>
-          <button>Add Expense</button>
+          <button>{origin}</button>
         </form>
       </div>
     )
