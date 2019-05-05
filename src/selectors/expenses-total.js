@@ -1,5 +1,5 @@
-export default (arr, type) => {
-    return arr.reduce((total, obj) => {
-      return total + Number(obj[type]);
-    }, 0);
-}
+export default (expenses) => {
+  return expenses
+      .map((expense) => expense.amount)
+      .reduce((sum, value) => sum + value, 0);
+};
